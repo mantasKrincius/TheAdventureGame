@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adventurers!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="d-flex f-center f-wrap">
+<div class="container">
+    <h1>The Adventures Game</h1>
+    <div class="d-flex f-center wrapper">
+        <div class="importantInfo">
+            <div class="playerInfoDecoration d-flex f-center p-20 m-10 f-d-column">
+                <div id="playerInfo" class="d-flex f-center"></div>
+                <div class="avatarDecoration">
+                    <img src="https://cdn.dribbble.com/users/1405795/screenshots/9108434/media/80c13642df909f504d672d2fe430a035.jpg?compress=1&resize=400x300" alt="Hero avatar">
+                </div>
+            </div>
+            <div id="loot"></div>
+            <div id="sadInfo"></div>
+            <div id="goodInfo"></div>
+        </div>
+        <div id="town" class="townDecoration">
+            <h3>Capital of Antharas</h3>
+            <div class="d-flex f-center">
+                <img src="https://i.pinimg.com/originals/83/2d/4b/832d4b162272d7715da3754435d2cf39.jpg" alt="castle picture">
+            </div>
+            <button id="toArena">To Arena</button>
+            <button id="toChurch">Church</button>
+            <button id="toCastle">To Castle</button>
+            <div id="churchModal" class="modal">
+                <div id="adds" class="modal-content">
+                    <span class="close"></span>
+                    <button id="heal">Heal 10HP for 5g!</button>
+                    <button id="lvlup">Level Up!</button>
+                    <button id="skill1">Learn how to heal</button>
+                </div>
+            </div>
+        </div>
+        <div id="castle" class="d-none castleDecoration f-wrap">
+            <h3>Jonathan Castle</h3>
+            <div class="d-flex f-center">
+                <img src="https://img5.goodfon.com/wallpaper/nbig/8/13/gorod-zamok-city-fantasy-arkhitektura-art-art-white-castle-i.jpg" alt="town picture">
+            </div>
+            <button id="backToTown">To Town</button>
+            <button id="kingAttack">Chalange King Jonathan</button>
+            <div class="d-flex f-center">
+                <div class="battlefieldDecoration f-grow">
+                    <div id="PlayerAtt"></div>
+                    <div id="MonsterAtt"></div>
+                </div>
+                <div>
+                    <div class="creatureInfoDecoration" id="kingInfo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="arena" class="d-none arenaDecoration f-wrap">
+            <h3>Arena of Antharas</h3>
+            <div>
+                <img src="https://i.pinimg.com/originals/58/27/3e/58273e1c7ad45a72da84155b976c9016.jpg" alt="arena picture">
+            </div>
+            <button id="toTown">To Town</button>
+            <button id="creatureAttack">Attack</button>
+            <button id='chooseCreature'>Choose your opponent</button>
+            <div class="d-flex f-center">
+                <div class="battlefieldDecoration f-grow">
+                    <div class="PlayerAtt"></div>
+                    <div class="MonsterAtt"></div>
+                </div>
+                <div>
+                    <div class="creatureInfoDecoration" id="creatureInfo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="futureUpdates" class="d-flex f-center m-10">
+    <div class="p-20 m-10">
+        <h4>ToDo:</h4>
+        <ul>
+            <li> CHAPTER 2, to add skills, quests and shop</li>
+            <li> "d-none" and "d-block" things to change to removeChild and appendChild</li>
+            <li> To check possibilty to use toggle on some elements instead of disabled</li>
+            <li> To find a way to cut story function to units</li>
+            <li> Balanced all creature and player stats</li>
+            <li> Add ajax for interactive town picture</li>
+            <li> Make full responsible (target is on horizontal mobile)</li>
+            <li> Add pictures for creatures and the king</li>
+            <li> Banking system</li>
+            <li> Honor points system</li>
+            <li> HP/ EXP bars</li>
+            <li> Add new locations and bosses</li>
+        </ul>
+    </div>
+    <div class="p-20 m-10">
+        <h4>Update:</h4>
+        <div></div>
+        <p>Version 1.0</p>
+        <p>Added Healing skill</p>
+    </div>
+    <div class="p-20 m-10">
+        <h4>Date:</h4>
+        <p>Date Unknown</p>
+    </div>
+</div>
+
+
+<script src="events.js"></script>
+</body>
+</html>
