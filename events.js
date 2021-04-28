@@ -365,7 +365,7 @@ function healing() {
     let sadInfo = document.querySelector("#sadInfo");
     if (playerCard.gold >= 5 && playerCard.hitpoints !== playerCard.maxhp) {
         playerCard.gold = playerCard.gold - 5;
-        playerCard.hitpoints = playerCard.hitpoints + 5;
+        playerCard.hitpoints = playerCard.hitpoints + 10;
         if (playerCard.hitpoints > playerCard.maxhp) {
             playerCard.hitpoints = playerCard.maxhp;
         }
