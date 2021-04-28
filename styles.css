@@ -1,6 +1,11 @@
+/* main classes */
 body {
-    background-color: antiquewhite;
+    background-image: url("https://w.wallhaven.cc/full/6q/wallhaven-6qmxo6.jpg");
+    font-family: 'Inconsolata', monospace;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 .container {
     margin: 0 auto;
     padding: 0 30px;
@@ -9,9 +14,12 @@ body {
 }
 
 .wrapper {
-    background-color: lightcoral;
-    border: 5px solid black;
+    background-image: url("https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg");
+    border: 24px groove rgba(28, 110, 164, 0.51);
+    border-radius: 40px;
 }
+
+/* working classes */
 
 .f-btw {
     justify-content: space-between;
@@ -33,14 +41,6 @@ body {
     display: flex;
 }
 
-h3 {
-    color: white;
-}
-
-h4 {
-    margin: 0;
-    padding: 0;
-}
 .f-center {
     justify-content: center;
 }
@@ -53,6 +53,7 @@ h4 {
     flex-grow: 1;
 }
 
+/* utility classes */
 .p-20 {
     padding: 20px;
 }
@@ -61,21 +62,37 @@ h4 {
     margin: 10px;
 }
 
+/* content classes*/
+
+h1 {
+    box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    background: #ECEFCF;
+}
+
+h3 {
+    color: white;
+}
+
+h4 {
+    margin: 0;
+    padding: 0;
+}
+
 .playerInfoDecoration {
     background-color: slategray;
     color: white;
     padding: 10px;
     margin-right: 10px;
-    border: 2px solid black;
-    border-radius: 10px;
+    border: 7px ridge rgba(28, 110, 164, 0.51);
+    border-radius: 40px 40px 0 40px;
 }
 
 .castleDecoration {
-    background-color: gold;
+    background-image: url("https://image.freepik.com/free-photo/old-grunge-cement-wall-backgrounds_34552-195.jpg");
 }
 
 .townDecoration, .arenaDecoration {
-    background-color: slategray;
+    background-image: url("https://media.istockphoto.com/photos/blue-abstract-background-or-texture-picture-id1138395421?k=6&m=1138395421&s=612x612&w=0&h=bJ1SRWujCgg3QWzkGPgaRiArNYohPl7-Wc4p_Fa_cyA=");
 }
 
 .townDecoration div img, .arenaDecoration div img, .castleDecoration div img {
@@ -89,8 +106,8 @@ h4 {
 }
 
 button:hover {
-   background-color: #754343;
-    color: white    ;
+    background-color: #754343;
+    color: white;
 }
 
 button {
@@ -106,9 +123,10 @@ button {
 }
 
 .creatureInfoDecoration {
-    border: 1px solid black;
+    border: 14px ridge #1C6EA4;
+    border-radius: 20px;
     margin: 5px;
-    color: black    ;
+    color: white;
     font-weight: 700;
 }
 
@@ -119,14 +137,6 @@ button {
     border-radius: 50%;
 }
 
-.p-50 {
-    padding: 20px;
-}
-
-.m-50 {
-    margin: 10px;
-}
-
 .modal {
     display: none;
     position: fixed;
@@ -135,17 +145,18 @@ button {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4)
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4)
 }
 
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
-    border-radius: 10px;
+    border: 24px double rgba(28, 110, 164, 0.33);
+    border-radius: 40px;
     width: 50%;
+    opacity: 0.9;
 }
 
 .importantInfo {
@@ -153,8 +164,9 @@ button {
     height: 200px;
 }
 
-#sadInfo {
+#sadInfo, #goodInfo, #loot {
     padding: 10px;
+    font-weight: 700;
 }
 
 #storyContent {
@@ -166,6 +178,9 @@ button {
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
+    padding: 7px;
 }
 
-
+#futureUpdates {
+    color: white;
+}
