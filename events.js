@@ -25,14 +25,14 @@ if (localStorage.getItem('playerInfo')) {
 } else {
     playerCard = {
         name: "",
-        level: 2,
-        attack: 8,
-        defense: 8,
+        level: 0,
+        attack: 7,
+        defense: 7,
         hitpoints: 30,
-        maxhp: 35,
-        exp: 19,
+        maxhp: 40,
+        exp: 0,
         lvlup: 20,
-        gold: 50,
+        gold: 30,
         magic: 0,
         maxmagic: 20
     };
@@ -42,30 +42,30 @@ savePlayerInfo();
 let creature;
 let creatures = [{
     name: "Orc",
-    attack: 7,
+    attack: 5,
     defense: 5,
-    hp: 4,
+    hp: 10,
     exp: 1,
     gold: 2
 }, {
     name: "Goblin",
-    attack: 6,
-    defense: 3,
-    hp: 5,
+    attack: 5,
+    defense: 4,
+    hp: 11,
     exp: 1,
     gold: 1
 }, {
     name: "Ogre",
-    attack: 8,
-    defense: 2,
-    hp: 2,
+    attack: 4,
+    defense: 6,
+    hp: 12,
     exp: 1,
     gold: 2
 }, {
     name: "Shaman",
-    attack: 5,
-    defense: 1,
-    hp: 3,
+    attack: 3,
+    defense: 3,
+    hp: 13,
     exp: 1,
     gold: 1
 }];
@@ -183,25 +183,25 @@ function challengeMonster() {
 function attackKing() {
     const playerAtt = document.querySelector('#PlayerAtt');
     let playerAttack = random(1, 5) + playerCard.attack;
-    let kingDefense = random(1, 5) + king.defense;
-    if (king.hp > 50) {
+    let kingDefense = random(1, 3) + king.defense;
+    if (king.hp < 50) {
         kingDefense = random(3, 10) + king.defense;
     }
 
     if (playerAttack > kingDefense) {
         king.hp = king.hp - playerCard.attack;
-        playerAtt.innerHTML = `<p>${playerCard.name}: I just hit ${playerCard.attack} damage!... Surrender, Jonathan!!</p>`;
+        playerAtt.innerHTML = `<p>${playerCard.name}: Enjoy! ${playerCard.attack} damage! Surrender, Jon!</p>`;
     } else {
-        king.hp = king.hp + 5;
+        king.hp = king.hp + random(1, 5);
         playerAtt.innerHTML = `<p>${playerCard.name}: Damn, missed... You're CHEATER!</p>`;
     }
     const monsterAtt = document.querySelector('#MonsterAtt');
-    let kingAttack = random(1, 5) + king.attack;
+    let kingAttack = random(1, 3) + king.attack;
     let playerDefense = random(1, 5) + playerCard.defense;
 
     if (kingAttack > playerDefense) {
         playerCard.hitpoints = playerCard.hitpoints - kingAttack;
-        monsterAtt.innerHTML = `<p>Jonathan: enjoy ${king.attack} damage to your face! HAHA</p>`;
+        monsterAtt.innerHTML = `<p>Jonathan: enjoy ${king.attack} damage to your face!</p>`;
     } else {
         monsterAtt.innerHTML = `<p>Jonathan: Damn, ${playerCard.name}, i missed!</p>`;
     }
@@ -226,8 +226,10 @@ function kingdead() {
         const victoryImg = document.createElement('img');
 
         victoryMessage.style.fontSize = "40px";
-        victoryMessage.append("Congratulations! You just defeated Jonathan! All love from all villages comes to You! <br> To be continue...");
+        victoryMessage.append(`Congratulations! You just defeated Jonathan! All love from all villages comes to You! To be continue...`);
         victoryImg.srcset = "https://i.ytimg.com/vi/gDg9By4yqYo/hqdefault.jpg";
+        victoryMessage.style.color = "white";
+        victoryMessage.style.fontWeight = "700";
         div.style.textAlign = "center";
         victoryMessage.style.textAlign = "center";
 
@@ -236,9 +238,13 @@ function kingdead() {
         div.appendChild(victoryImg);
         titleDiv.appendChild(victoryMessage);
 
-        toTownFromCastleBtn.disabled = false;
-        servantAttBtn.disabled = true;
+        window.setInterval('refresh()', 5000);
     }
+}
+
+
+function refresh() {
+    window.location.reload();
 }
 
 function screencleaner() {
@@ -253,16 +259,18 @@ function screencleaner() {
 //with each level, creature and king getting stronger, just for fun, for later chapters
 function creatureLvlUp() {
     creatures.forEach(item => {
-        item.attack = item.attack + random(1, 2);
-        item.defense = item.defense + playerCard.level;
+        item.attack = item.attack + random(1, 3);
+        item.defense = item.defense + random(1, 3)
         item.hp = item.hp + playerCard.level + 10;
         item.exp = item.exp + random(1, 3);
-        item.gold = item.gold + random(1, 10);
+        item.gold = item.gold + random(1, 5);
     })
 
-    king.attack = king.attack + random(0, 3);
+    king.attack = king.attack + random(1, 3);
     king.hp = king.hp + playerCard.level;
-    king.defense = king.defense + random(0, 3);
+    king.defense = king.defense + random(1, 3);
+    creatureInfo()
+    kingInfo()
 }
 
 function savePlayerInfo() {
@@ -330,7 +338,7 @@ function receiveExpGold() {
 
 //after dead/injuried disabled attack and next btns
 function playerdead() {
-    if (playerCard.hitpoints < 0) {
+    if (playerCard.hitpoints < 1) {
         attBtn.disabled = true;
         servantAttBtn.disabled = true;
         continueToFight.disabled = true;
@@ -341,7 +349,7 @@ function playerdead() {
 }
 
 function creaturedead() {
-    if (creature.hp < 1 && playerCard.hitpoints > 1) {
+    if (creature.hp < 1 && playerCard.hitpoints >= 1) {
         continueToFight.disabled = false;
         attBtn.disabled = true;
     }
@@ -349,6 +357,7 @@ function creaturedead() {
         document.querySelector('#loot').innerHTML = `<p>Creature dead <br> You get killed ${creature.name} and find ${creature.gold} gold and got ${creature.exp} exp</p>`
         receiveExpGold();
         playerInfo();
+        creatureInfo()
     }
 }
 
@@ -383,14 +392,14 @@ function lvlup() {
         playerCard.lvlup = playerCard.lvlup + 20;
         playerCard.magic = playerCard.magic + 3;
         document.querySelector("#goodInfo").innerHTML = `<p>Congratulations! Lvl UP! Now you're ${playerCard.level} level!</p><br> Your stats increased as well!`
+        playerInfo()
         savePlayerInfo();
         creatureLvlUp();
         skilleHealYourSelfUnlock();
-        playerInfo()
+
     } else {
         document.querySelector("#goodInfo").innerHTML = "<p>You need to get more expierance</p><br>"
     }
-    playerInfo();
 }
 
 /// WORKING ON SKILLS!
@@ -398,7 +407,7 @@ function lvlup() {
 function skilleHealYourSelfUnlock() {
     const skill1 = document.querySelector('#skill1');
     // const skill2 = document.querySelector('#skill2');
-    playerCard.level === 2 ? skill1.disabled = false : skill1.disabled = true;
+    playerCard.level >= 3 ? skill1.disabled = false : skill1.disabled = true;
     // playerCard.level === 3 ? skill2.disabled = false : skill2.disabled = true;
 }
 
@@ -418,24 +427,34 @@ function learnHeal() {
 }
 
 function creatingSkillButton() {
-    const arena = document.querySelector('#arena');
     const castle = document.querySelector('#castle');
+    const arena = document.querySelector('#arena');
 
-    const button = document.createElement('button');
+    const buttonOne = document.createElement('button')
+    const buttonTwo = document.createElement('button');
 
-    button.innerHTML = "Skill1 <br> Heal";
+    buttonOne.innerHTML = "Skill1 <br> Heal";
+    buttonTwo.innerHTML = "Skill1 <br> Heal";
 
-    castle.appendChild(button);
-    arena.appendChild(button);
+    castle.appendChild(buttonOne);
+    arena.appendChild(buttonTwo);
 
-    button.addEventListener('click', healYourSelf);
+    buttonOne.addEventListener('click', healYourSelf);
+    buttonTwo.addEventListener('click', healYourSelf);
 }
 
 function healYourSelf() {
+    const attKing = document.querySelector('#kingAttack')
+    const attCreature = document.querySelector('#creatureAttack')
     if (playerCard.magic > 0) {
         playerCard.magic = playerCard.magic - 1;
-        playerCard.hitpoints = playerCard.hitpoints + 30;
-        document.querySelector('#goodInfo').innerHTML = "You just healed 20hp!";
+        playerCard.hitpoints = playerCard.hitpoints + random(20, 30);
+        if (playerCard.hitpoints > playerCard.maxhp) {
+            playerCard.hitpoints = playerCard.maxhp;
+            attCreature.disabled = false;
+            attKing.disabled = false;
+        }
+        document.querySelector('#goodInfo').innerHTML = "Magic healing power!";
     } else {
         document.querySelector('#sadInfo').innerHTML = "You need 1 rune for it!";
     }
@@ -443,8 +462,7 @@ function healYourSelf() {
     savePlayerInfo();
 }
 
-
-const storyChapters = ['<p>Waky waky, stranger... <br> Gods, why are you lying by the Antharas city gate...?</p>', '<p>I can see injuries at your body... <br> Are you are still in pain? </p>', '<p>I never saw you here. Are you new in a capital? <br> This place full of s**t... </p>', '<p>People who lives here, lives under pressure of our King Jonathan<br> He loves our gold and hates us... <br> He could kill anyone, only cus he is in a a bad mood <br> People scared and poor here... <br> We still waiting for our heroe.. Who will help us or at least defend us from our King Jonathan servants </p>', '<p>Thats how people lives here... <br> But im not gonna moan about it anymore to you, Sir <br> Would you like to eat some food, you look hungry.. </p>', '<p>Ill share with you just dry bread, but still better than nothing<br> Are you still wanna to get into city?</p>', '<p>If you want to help us... <br> Go to fight in arena, get some glory! Dont forget time to time visit our church...<br> And one day you will find a way to sort everything, stay strong..</p>', '<img class="gateDecoration" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/787400/e54a88667f299c8c0196f33616e866688429008f.jpg" alt="the gate">', `<p>Before you enter to our city.. <br> The last question, stranger, whats your name?</p>`];
+const storyChapters = ['<p>Waky waky, stranger... <br> Gods, why are you lying by the Antharas city gate...?</p>', '<p>I can see injuries on your body... <br> Are you in pain, warrior? </p>', '<p>I never saw you here. Are you new in a capital? <br> This place full of s**t... </p>', '<p>People who lives here, lives under pressure of our King Jonathan<br> He loves our gold, but hates us as humans... <br> He could kill anyone, only cus he is in a bad mood <br> People scared and poor here... <br> We still waiting for our hero.. Who will help us or at least defend us from our King Jonathan servants </p>', '<p>Thats how people lives here... <br> But im not gonna moan about it anymore to you, warrior <br> Anyways would you like to eat some food together with me.. </p>', '<p>Ill share with dry bread, thats all what i have, but still better than nothing, isnt?<br> So, do you still wanna to get into city?</p>', '<p>If you want to help us... <br> Go fight to ARENA, there you can get some experience to increase your level<br> If you will get hurt, go visit doctor, he works at CHURCH, very nice lad! <br> He knows some magic spell, ask him maybe he will teach you some... <br> Save gold, my friend, healing cost a lot... <br> And one day you will find a way to stand against evil..</p>', '<img class="gateDecoration" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/787400/e54a88667f299c8c0196f33616e866688429008f.jpg" alt="the gate">', `<p>Before you enter to our city.. <br> The last question, i feel that i need to know it... <br> Warrior, whats your name?</p>`];
 storyChaptersShowing(storyChapters, 0);
 
 //ohh boys... this massive function... creating all story content... need to cut it to the units
@@ -459,13 +477,15 @@ function storyChaptersShowing(storyChapters, index) {
 
     if (storyChapters[index] !== undefined) {
 
-        div.style.border = "1pt solid black";
+        div.style.border = "12px groove #1C6EA4";
+        div.style.borderRadius = "0px 40px 0px 40px"
         div.style.width = "400pt";
         p.style.padding = "5pt";
-        p.style.lineHeight = "auto";
-        output.style.paddingLeft = "5pt";
+        p.style.color = "white"
+        p.style.lineHeight = "20px";
+        p.style.fontWeight = "700"
         output.style.color = "blue";
-
+        nextBtn.style.padding = "10px 20px"
 
         nextBtn.id = "next";
         output.id = "output";
